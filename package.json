@@ -1,0 +1,31 @@
+{
+  "name": "twitch_chat_bot",
+  "version": "0.0.1",
+  "description": "test twitch chatbot",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "tmi.js": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "run": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThyMajesty/twitch_chat_bot.git"
+  },
+  "keywords": [
+    "twitch",
+    "chatbot",
+    "bot",
+    "chat"
+  ],
+  "author": "thymajesty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThyMajesty/twitch_chat_bot/issues"
+  },
+  "homepage": "https://github.com/ThyMajesty/twitch_chat_bot#readme"
+}
