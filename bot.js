@@ -1,12 +1,13 @@
 const tmi = require('tmi.js');
+let commands = require('./commands').commands;
+const BotFunctions = require('./botFunctions.js').BotFunctions;
 
-class ChatBot {
-    constructor(options, botFunctions, specialChars) {
+exports.ChatBot = class ChatBot {
+    constructor(options) {
         this.botClient = new tmi.client(options);
-        this.botClient.on('message', this.onMessageHandler);
-        this.botClient.on('connected', this.onConnectedHandler);
-        this.botFunctions = new botFunctions();
-        this.specialChars = specialChars;
+        this.botClient.on('message', this.onMessageHandler.bind(this));
+        this.botClient.on('connected', this.onConnectedHandler.bind(this));
+        this.botFunctions = new BotFunctions(commands);
         this.connect();
     }
 
@@ -19,13 +20,12 @@ class ChatBot {
     }
 
     onMessageHandler(target, context, msg, self) {
-        let commandName = msg.trim();
-        if (self || !this.specialChars.includes(commandName[0])) {
+        //console.log(target, context, msg, self);
+        if(self) {
             return;
         }
-
-        commandName = commandName.substr(1);
-        const response = this.botFunctions.execute(commandName);
+        const response = this.botFunctions.executeCommand(target, context, msg, self);
+        console.log(response);
         this.botClient.say(target, response);
     }
 }
