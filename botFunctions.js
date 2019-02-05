@@ -13,12 +13,11 @@ exports.BotFunctions = class BotFunctions {
     executeCommand(target, context, msg, self) {
         //console.log(msg);
         let response = '',
-            commandObject = this.extractCommand(msg.split(' '));
-        console.log(commandObject);
+            commandObject = this.extractCommand(msg.split(' ').map(el => el.toLowerCase()));
         if (commandObject) {
             this.commands.map(el => {
-                if(el.name === commandObject.command) {
-                    response = el.command.call(this, commandObject.args.slice(0, el.argsCount));
+                if(el.name.includes(commandObject.command)) {
+                    response = el.command.call(this, commandObject.command, commandObject.args.slice(0, el.argsCount));
                 }
             });
         }
@@ -26,7 +25,9 @@ exports.BotFunctions = class BotFunctions {
     }
 
     extractCommand(msgArr) {
-        let commandNames = this.commands.map(el => el.name);
+        let commandNames = this.commands.reduce((acc, el) => {
+            return acc.concat(el.name);
+        }, []);
         let command = '';
         let args = [];
         for (let i = 0; i < commandNames.length; i++) {

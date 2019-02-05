@@ -1,7 +1,7 @@
 exports.randomCommand = {
-    name: '!random',
+    name: ['!random'],
     argsCount: 2,
-    command: function (args) {
+    command: function (command, args) {
         console.log('args', args, !args);
         let arg1 = args[0] || 0,
             arg2 = args[1] ? args[1] : args[0] ? 0 : 100;
