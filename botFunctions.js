@@ -32,7 +32,7 @@ exports.BotFunctions = class BotFunctions {
         let args = [];
         for (let i = 0; i < commandNames.length; i++) {
             for(let j = 0; j < msgArr.length; j++) {
-                if (commandNames[i] === msgArr[j]) {
+                if (commandNames[i].toLowerCase() === msgArr[j].toLowerCase()) {
                     command = commandNames[i];
                     args = msgArr.slice(j+1);
                     return {command: command, args: args};
